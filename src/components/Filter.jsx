@@ -8,20 +8,26 @@ export default function Filter({ films, setFilms, genres }) {
 
   const handleSelect = (e) => {
     setSelect(e.target.value);
-    setSearchValue("");
   };
 
   useEffect(() => {
+    let filteredMovies = [...films];
     console.log("EFFECT");
-    setFilter(
-      films.filter((film) => {
-        if (select) {
-          return film.genre.toLowerCase().includes(select.toLowerCase());
-        } else {
-          return film.title.toLowerCase().includes(searchValue.toLowerCase());
-        }
-      }),
-    );
+
+    if (select) {
+      // filteredMovies = filteredMovies.genre.toLowerCase().includes(select.toLowerCase());
+      filteredMovies = films.filter(movie => {
+        return movie.genre.toLowerCase() == select.toLowerCase()
+      })
+    } 
+    
+    if(searchValue) {
+      // filteredMovies = filteredMovies.title.toLowerCase().includes(searchValue.toLowerCase());
+      filteredMovies = filter.filter(movie => {
+        return movie.title.toLowerCase().includes(searchValue.toLowerCase())
+      })
+    }
+    setFilter(filteredMovies);
   }, [films, searchValue, select]);
 
   return (
@@ -37,7 +43,6 @@ export default function Filter({ films, setFilms, genres }) {
             value={searchValue}
             onChange={(e) => {
               setSearchValue(e.target.value);
-              setSelect("");
             }}
           />
         </div>
