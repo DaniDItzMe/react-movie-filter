@@ -48,7 +48,7 @@ export default function Filter({ films, setFilms, genres }) {
             value={select}
             onChange={(e) => handleSelect(e)}
           >
-            <option value="">Nessun genere</option>
+            <option value="">Tutti i generi</option>
             {genres.map((genre, i) => (
               <option key={i} value={genre}>
                 {genre}
